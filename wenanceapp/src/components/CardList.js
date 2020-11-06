@@ -4,7 +4,9 @@ import Card from "./Card";
 //components
 
 const CardList = ({ data }) => {
-  return data && data.map((peope) => <Card header={data.name} />);
+  return (
+    data && data.map((people, index) => <Card item={people} key={index} />)
+  );
 };
 
 export default CardList;
