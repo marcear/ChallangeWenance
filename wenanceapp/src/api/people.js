@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getPeopleData = () => {
+const getPeopleData = (dispatch) => {
   return axios.get("https://swapi.dev/api/people/");
 };
 

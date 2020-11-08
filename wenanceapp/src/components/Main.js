@@ -3,23 +3,20 @@ import React, { useEffect, useState } from "react";
 import { Container } from "semantic-ui-react";
 //components
 import CardList from "./CardList";
-//services
-import { getPeopleData } from "../services/PeoplesService";
+//redux store
+import store from "../store/store";
+//constans
+import { GET_PEOPLE } from "../constants/ActionTypes";
+import { getPeople } from "../actions/people";
 
 const Main = () => {
-  const [peopleData, setPeopleData] = useState([]);
+  console.log("store", store);
 
   useEffect(() => {
-    getPeopleData().then((response) => {
-      setPeopleData(response.data.results);
-    });
+    store.dispatch(getPeople);
   }, []);
 
-  return (
-    <Container style={{ width: "500px", paddingTop: "20px" }}>
-      <CardList data={peopleData}></CardList>
-    </Container>
-  );
+  return <Container style={{ width: "500px", paddingTop: "20px" }}></Container>;
 };
 
 export default Main;
