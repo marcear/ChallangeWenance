@@ -1,12 +1,31 @@
 import React from "react";
-//semantic ui
-import Card from "./Card";
 //components
+import Card from "./Card";
+//react redux
+import { connect } from "react-redux";
+//semantic
+import { Loader } from "semantic-ui-react";
+//actions
+import { deletePeopleByIndex, getVisiblePeople } from "../actions/people";
 
-const CardList = ({ data }) => {
+const CardList = ({ people, loading, dispatch }) => {
+  if (loading) return <Loader active inline="centered" />;
+
   return (
-    data && data.map((people, index) => <Card item={people} key={index} />)
+    people &&
+    people.map((people, index) => (
+      <Card
+        people={people}
+        key={index}
+        handleDeletePeople={() => dispatch(deletePeopleByIndex(index))}
+      />
+    ))
   );
 };
 
-export default CardList;
+const mapStateToProps = (state) => ({
+  people: getVisiblePeople(state.people, state.searchQuery),
+  loading: state.loading,
+});
+
+export default connect(mapStateToProps)(CardList);

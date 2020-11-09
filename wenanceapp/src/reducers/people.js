@@ -4,18 +4,19 @@ const initialState = {
   people: [],
   loading: false,
   error: "",
+  searchQuery: "",
 };
 
 const peopleReducer = (state = initialState, action) => {
-  debugger;
   switch (action.type) {
     case types.LOADED_SUCCESS:
       return {
         ...state,
         people: action.payload,
+        loading: false,
       };
 
-    case types.LOADING_PEOPLE:
+    case types.LOADING:
       return {
         ...state,
         loading: true,
@@ -24,7 +25,23 @@ const peopleReducer = (state = initialState, action) => {
     case types.ERROR:
       return {
         ...state,
-        loading: true,
+        loading: false,
+        error: action.payload,
+      };
+
+    case types.DELETE:
+      return {
+        ...state,
+        people: state.people.filter(
+          (p) => state.people.indexOf(p) != action.payload
+        ),
+        loading: false,
+      };
+
+    case types.SEARCH:
+      return {
+        ...state,
+        searchQuery: action.payload,
       };
 
     default:

@@ -9,14 +9,16 @@ import {
   Button,
 } from "semantic-ui-react";
 
-const Card = ({ item }) => {
+const Card = ({ people, handleDeletePeople }) => {
   return (
     <SemanticCard fluid>
       <CardContent>
-        <CardHeader content={item.name} />
-        <Button floated="right">Delete</Button>
-        <CardMeta content={item.gender} />
-        <CardDescription content={item.skin_color} />
+        <CardHeader content={people.name} />
+        <Button floated="right" onClick={handleDeletePeople}>
+          Delete
+        </Button>
+        <CardMeta content={people.gender} />
+        <CardDescription content={people.skin_color} />
       </CardContent>
     </SemanticCard>
   );
