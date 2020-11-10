@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //semantic
 import { Input, Button } from "semantic-ui-react";
 //react redux
@@ -12,7 +12,7 @@ const SearchForm = ({ dispatch }) => {
   const [searchedQuery, setSearchedQuery] = useState("");
 
   const handleSearch = () => {
-    dispatch({ type: types.SEARCH, payload: searchedQuery });
+    dispatch({ type: types.UPDATE_QUERY, payload: searchedQuery });
   };
 
   const handleKeyDown = (e) => {
@@ -20,6 +20,12 @@ const SearchForm = ({ dispatch }) => {
       handleSearch();
     }
   };
+
+  useEffect(() => {
+    if (searchedQuery === "") {
+      handleSearch();
+    }
+  }, [searchedQuery]);
 
   return (
     <>
@@ -37,7 +43,6 @@ const SearchForm = ({ dispatch }) => {
 
 const mapStateToProps = (state) => ({
   people: state.people,
-  loading: state.loading,
 });
 
 export default connect(mapStateToProps)(SearchForm);

@@ -6,9 +6,11 @@ import { connect } from "react-redux";
 //semantic
 import { Loader } from "semantic-ui-react";
 //actions
-import { deletePeopleByIndex, getVisiblePeople } from "../actions/people";
+import { getVisiblePeople } from "../actions/people";
 //css
 import "./CardList.css";
+//constants
+import * as types from "../constants/ActionTypes";
 
 const CardList = ({ people, loading, dispatch }) => {
   if (loading)
@@ -20,11 +22,16 @@ const CardList = ({ people, loading, dispatch }) => {
 
   return (
     people &&
-    people.map((people, index) => (
+    people.map((person, index) => (
       <Card
-        people={people}
+        people={person}
         key={index}
-        handleDeletePeople={() => dispatch(deletePeopleByIndex(index))}
+        handleDeletePeople={() =>
+          dispatch({
+            type: types.OPEN_CONFIRM,
+            payload: { show: true, person: person, index: index },
+          })
+        }
       />
     ))
   );
@@ -33,6 +40,7 @@ const CardList = ({ people, loading, dispatch }) => {
 const mapStateToProps = (state) => ({
   people: getVisiblePeople(state.people, state.searchQuery),
   loading: state.loading,
+  deleteConfirmOpen: state.deleteConfirmOpen,
 });
 
 export default connect(mapStateToProps)(CardList);

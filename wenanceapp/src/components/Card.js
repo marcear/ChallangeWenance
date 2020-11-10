@@ -17,8 +17,8 @@ const Card = ({ people, handleDeletePeople }) => {
         <Button floated="right" onClick={handleDeletePeople}>
           Delete
         </Button>
-        <CardMeta content={people.gender} />
-        <CardDescription content={people.skin_color} />
+        <CardMeta content={`Gender: ${people.gender}`} />
+        <CardDescription content={`Skin color: ${people.skin_color}`} />
       </CardContent>
     </SemanticCard>
   );

@@ -4,6 +4,7 @@ import { Container, Grid } from "semantic-ui-react";
 //components
 import CardList from "./CardList";
 import SearchForm from "./SearchForm";
+import Confirm from "./Confirm";
 //redux store
 import store from "../store/store";
 //react-redux
@@ -25,6 +26,7 @@ const Main = () => {
           <Grid.Column>
             <SearchForm />
             <CardList />
+            <Confirm />
           </Grid.Column>
         </Grid>
       </Provider>

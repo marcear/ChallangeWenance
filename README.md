@@ -1,4 +1,4 @@
-## Available Scripts
+## Criteria
 
 Wenance challange by Marcelo Arias
 
