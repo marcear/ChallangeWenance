@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 //semantic
 import { Input, Button } from "semantic-ui-react";
 //react redux
 import { connect } from "react-redux";
 //constant types
 import * as types from "../constants/ActionTypes";
+//css
+import "./SearchForm.css";
 
 const SearchForm = ({ dispatch }) => {
+  const [searchedQuery, setSearchedQuery] = useState("");
+
+  const handleSearch = () => {
+    dispatch({ type: types.SEARCH, payload: searchedQuery });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <>
       <Input
-        onChange={(e) =>
-          dispatch({ type: types.SEARCH, payload: e.target.value })
-        }
+        onChange={(e) => setSearchedQuery(e.target.value)}
         placeholder="Search..."
+        onKeyDown={handleKeyDown}
       />
-      <Button>Search</Button>
+      <Button className="searchform-button" onClick={handleSearch}>
+        Search
+      </Button>
     </>
   );
 };

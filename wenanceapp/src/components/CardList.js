@@ -7,9 +7,16 @@ import { connect } from "react-redux";
 import { Loader } from "semantic-ui-react";
 //actions
 import { deletePeopleByIndex, getVisiblePeople } from "../actions/people";
+//css
+import "./CardList.css";
 
 const CardList = ({ people, loading, dispatch }) => {
-  if (loading) return <Loader active inline="centered" />;
+  if (loading)
+    return (
+      <div className="cardlist-loader">
+        <Loader active inline="centered" />
+      </div>
+    );
 
   return (
     people &&
